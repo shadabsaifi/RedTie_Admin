@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+.modal-dialog {
+    max-width: 500px;
+    margin: 37.75rem auto;
+}
+
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 3px;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

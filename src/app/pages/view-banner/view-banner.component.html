@@ -1,0 +1,65 @@
+<div class="mainbox">
+    <app-side-menu></app-side-menu>
+  <div class="right-section">
+    <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+    <div class="right-inner">
+              <div class="filter-block">
+                <fieldset class="global-fieldset">
+                   <legend>Banner Detail</legend>
+                    <div class="filter-content">
+                         <div class="common-detail-box">
+                            <div class="form-group row">
+                                <label class="col-sm-6  label-right">Venue Logo</label>
+                                  <div class="col-sm-6">
+                                      <div clss="add_images_box">
+                                          <ul class="img_list">
+                                              <li class="addImage" *ngIf="!viewBannerDetail.bannerImage">
+                                                  <img src="assets/img/placeholder.png">
+                                              </li>
+                                              <li class="addImage" *ngIf="viewBannerDetail.bannerImage">
+                                                  <img src="{{viewBannerDetail.bannerImage}}">
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="form-group row">
+                               <label class="col-sm-6  label-right">Banner Name : </label>
+                               <div class="col-sm-6">
+                                  {{viewBannerDetail?.bannerName || '----'}}
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                               <label class="col-sm-6 label-right">Link :</label>
+                               <div class="col-sm-6">
+                                  {{viewBannerDetail?.link || '----'}}
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Status :</label>
+                                <div class="col-sm-6">
+                                   {{viewBannerDetail.status == "ACTIVE" ? "Active" : "Inactive" || '----'}}
+                                </div>
+                             </div>
+                            <div class="form-group row">
+                              <label class="col-sm-6 label-right">Created date :</label>
+                              <div class="col-sm-6">
+                                 {{viewBannerDetail?.createdAt  | date:'yyyy-MM-dd' || '----'}}
+                              </div>
+                           </div>
+                            <div class="table-button text-center mt30">
+                               <button [routerLink]="['/promotion-banner-management']" class="btn btn-danger">Back</button>
+                            </div>
+                         </div>
+                    </div>
+                </fieldset>
+              </div>        
+          </div>  
+        </div>
+  </div>
+  
+  
+  
+  
+  
+  

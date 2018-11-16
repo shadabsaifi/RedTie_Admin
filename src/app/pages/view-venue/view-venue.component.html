@@ -1,0 +1,109 @@
+<div class="mainbox">
+    <app-side-menu></app-side-menu>
+    <div class="right-section">
+        <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+        <div class="right-inner">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="btn-right">
+                        <!-- <button class="btn btn-red btn-common" (click)="AddOrViewMenu('/order-management/')">Order History</button> -->
+                        <button class="btn btn-red btn-common" *ngIf="!viewVenueDetail.isMenu" (click)="AddOrViewMenu('/add-menu/')">Add Menu</button>
+                        <button class="btn btn-red btn-common" *ngIf="viewVenueDetail.isMenu" (click)="AddOrViewMenu('/menu-management/')">View Menu</button>
+                        <button class="btn btn-red btn-common" *ngIf="!viewVenueDetail.isSpeciality" (click)="AddOrViewMenu('/add-venue-speciality/')">Add Speciality</button>
+                        <button class="btn btn-red btn-common" *ngIf="viewVenueDetail.isSpeciality" (click)="AddOrViewMenu('/view-venue-speciality/')">View Speciality</button>
+                    </div>
+                </div>
+             </div>
+            <div class="filter-block">
+                <fieldset class="global-fieldset">
+                    <legend>Venue Detail</legend>
+                    <div class="filter-content">
+                        <div class="common-detail-box">
+                            <div class="form-group row">
+                                <label class="col-sm-6  label-right">Venue Images</label>
+                                <div class="col-sm-6">
+                                    <div clss="add_images_box">
+                                        <ul class="img_list">
+                                            <li class="addImage" *ngIf="!viewVenueDetail.images.length">
+                                                <img src="assets/img/placeholder.png">
+                                            </li>
+                                            <li class="addImage" *ngFor="let imageUrl of viewVenueDetail.images;let i = index">
+                                                <img src="{{imageUrl}}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6  label-right">Venue Logo</label>
+                                <div class="col-sm-6">
+                                    <div clss="add_images_box">
+                                        <ul class="img_list">
+                                            <li class="addImage" *ngIf="!viewVenueDetail.logo">
+                                                <img src="assets/img/placeholder.png">
+                                            </li>
+                                            <li class="addImage" *ngIf="viewVenueDetail.logo">
+                                                <img src="{{viewVenueDetail.logo}}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6  label-right">Establishment Name : </label>
+                                <div class="col-sm-6">
+                                    {{viewVenueDetail?.venueName || '----'}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Type :</label>
+                                <div class="col-sm-6">
+                                    {{viewVenueDetail?.venueType || '----'}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Address :</label>
+                                <div class="col-sm-6">
+                                    {{address || '----'}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">City</label>
+                                <div class="col-sm-6">
+                                    {{city || '----'}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                    <label class="col-sm-6 label-right">Total Tables</label>
+                                    <div class="col-sm-6">
+                                        {{viewVenueDetail?.totalTables || '----'}}
+                                    </div>
+                                </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Status :</label>
+                                <div class="col-sm-6">
+                                    {{viewVenueDetail?.status == 'ACTIVE' ? 'Active':'Inactive' || '----'}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Created date :</label>
+                                <div class="col-sm-6">
+                                    {{viewVenueDetail.createdAt | date:'yyyy-MM-dd' || '----'}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Description :</label>
+                                <div class="col-sm-6">
+                                    {{viewVenueDetail.description || '----'}}
+                                </div>
+                            </div>
+                            <div class="table-button text-center mt30">
+                                <button [routerLink]="['/venue-management']" class="btn btn-danger">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

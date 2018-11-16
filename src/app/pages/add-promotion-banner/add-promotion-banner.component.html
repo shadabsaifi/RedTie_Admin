@@ -1,0 +1,65 @@
+<div class="mainbox">
+    <app-side-menu></app-side-menu>
+    <div class="right-section no-scroll">
+        <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+        <div class="right-inner">
+            <!-- blank form for more add-->
+            <div class="repeate_area">
+                <div class="filter-block">
+                    <fieldset class="global-fieldset">
+                        <legend>Add Banner</legend>
+                        <div class="filter-content">
+                            <form class="login_box_outer" [formGroup]="bannerForm" novalidate>
+                                <div class="common-detail-box">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 label-right label-top">Banner Name<span style="color: red">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control custom-control" formControlName="bannerName" placeholder="Enter banner name" maxlength="50" />
+                                            <p *ngIf="bannerForm.get('bannerName').hasError('required') && bannerForm.get('bannerName').dirty">*banner name required</p>
+                                            <p *ngIf="bannerForm.get('bannerName').hasError('pattern') && bannerForm.get('bannerName').dirty">*enter valid name</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 label-right label-top">Link<span style="color: red">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control custom-control" formControlName="link" id="address" placeholder="link" maxlength="500" />
+                                            <p *ngIf="bannerForm.get('link').hasError('required') && bannerForm.get('link').dirty">*link required</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 label-right label-top">logo Image<span style="color: red">*</span></label>
+                                        <div class="col-sm-8">
+                                            <div clss="add_images_box">
+                                                <ul class="img_list">
+                                                    <li class="addImage" *ngIf="bannerForm.get('bannerImage').value">
+                                                        <i class="cross_icon fa fa-close" style="cursor: pointer" (click)="removeImage()"></i>
+                                                        <img src="{{bannerForm.get('bannerImage').value}}">
+                                                    </li>
+                                                    <li *ngIf="!bannerForm.get('bannerImage').value" class="addImage">
+                                                        <input class="file_field" type="file" style="cursor: pointer" (change)="onImageChange($event)" accept="image/*" />
+                                                        <i class="plusIcon">+</i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="common-detail-box">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 label-right label-top">Description<span style="color: red">*</span></label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control custom-control textarea-custom" formControlName="description"  placeholder="Description" id="description" maxlength="500"></textarea>
+                                            <p *ngIf="bannerForm.get('description').hasError('required') && bannerForm.get('description').dirty">*description required</p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                    <div class="table-button text-center mt30">
+                        <button (click)="addBanner()"  style="cursor: pointer" class="btn btn-red" [disabled]="bannerForm.invalid">Save </button>
+                        <button style="cursor: pointer" [routerLink]="['/promotion-banner-management']" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>

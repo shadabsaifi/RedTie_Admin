@@ -1,0 +1,125 @@
+<div class="mainbox">
+    <app-side-menu></app-side-menu>
+    <div class="right-section">
+        <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+        <div class="right-inner">
+            <div class="filter-block">
+                <fieldset class="global-fieldset">
+                    <legend>Venue Detail</legend>
+                    <div class="filter-content">
+                        <div class="common-detail-box">
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Venue Name :</label>
+                                <div class="col-sm-6">
+                                    {{venueDetail?.venueName || '----'}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-6  label-right">Venue Logo</label>
+                            <div class="col-sm-6">
+                                <div clss="add_images_box">
+                                    <ul class="img_list">
+                                        <li class="addImage" *ngIf="!venueDetail.logo">
+                                            <img src="assets/img/placeholder.png">
+                                        </li>
+                                        <li class="addImage" *ngIf="venueDetail.logo">
+                                            <img src="{{venueDetail.logo}}">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="filter-block">
+                <fieldset class="global-fieldset">
+                    <legend>Speciality Board</legend>
+                    <div class="filter-content">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="search-icon">
+                                        <input type="text" class="form-control max-wt-300 search-input" [(ngModel)]="searchWord" (keyup)="search()" placeholder="search">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="btn-right">
+                                    <button class="btn btn-red btn-common" (click)="addSpeciality()">Add Speciality</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box box-blue">
+                            <div class="box-body">
+                                <div class="custom-table table-responsive">
+                                    <table class="table table-striped table-border">
+                                        <thead>
+                                            <tr>
+                                                <th>SNo.</th>
+                                                <th>Category Name</th>
+                                                <th>Created Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let speciality of specialityList.specialityList | paginate: { itemsPerPage: specialityList.limit, currentPage: specialityList.page, totalItems: specialityList.total };  let i = index"
+                                                [attr.data-index]="i">
+                                                <td *ngIf="specialityList.page == 1">{{i + 1}}</td>
+                                                <td *ngIf="specialityList.page > 1">{{i + 1 + 10 * (specialityList.page-1)}}</td>
+                                                <td>{{speciality.categoryName || '----'}}</td>
+                                                <td>{{speciality.createdAt | date:'yyyy-MM-dd' || '----'}}</td>
+                                                <td>
+                                                    <div class="action-btn">
+                                                        <button class="btn btn-sm btn-success" (click)="editOrDelete(speciality._id, 'edit')">
+                                                            <i class="fa fa-ban"></i>&nbsp;Edit</button>
+                                                        <button class="btn btn-sm btn-danger" (click)="editOrDelete(speciality._id, 'delete')">
+                                                            <i class="fa fa-trash"></i>&nbsp; Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div *ngIf="specialityList.specialityList.length==0" class="no_record">
+                                    <h4>No records found!!</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <ul class="custom-pagination">
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="delete" class="modal fade" data-easein="bounceIn" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content common-detail-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-inner-text">
+                       Are you sure you want to delete this category?
+                    </p>
+      
+                    <div class="button-box mt20">
+                       <button class="btn btn-red mr10" (click)="yes()">Yes</button>
+                       <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+      </div>
+      

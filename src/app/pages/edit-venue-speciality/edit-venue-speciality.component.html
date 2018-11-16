@@ -1,0 +1,78 @@
+<div class="mainbox">
+    <app-side-menu></app-side-menu>
+    <div class="right-section no-scroll">
+        <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+        <div class="right-inner">
+            <div class="filter-block"><fieldset class="global-fieldset">
+              <legend>Venue Detail</legend>
+              <div class="filter-content">
+                  <div class="common-detail-box">
+                      <div class="form-group row">
+                          <label class="col-sm-6 label-right">Category Name</label>
+                          <div class="col-sm-6">
+                              {{venueDetail?.venueName || '----'}}
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-sm-6  label-right">Venue logo</label>
+                          <div class="col-sm-6">
+                              <div clss="add_images_box">
+                                  <ul class="img_list">
+                                      <li class="addImage">
+                                          <img src="{{venueDetail.logo || 'assets/img/placeholder.png'}}">
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </fieldset>
+                <fieldset class="global-fieldset">
+                    <legend>Edit Category</legend>
+                    <div class="filter-content">
+                        <form class="login_box_outer" [formGroup]='specialityForm' novalidate>
+                            <div class="common-detail-box">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 label-right label-top">Category Name<span style="color: red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control custom-control" formControlName="categoryName" placeholder="Enter category name" maxlength="50" />
+                                        <p *ngIf="specialityForm.get('categoryName').hasError('required') && specialityForm.get('categoryName').dirty">*category name required</p>
+                                        <p *ngIf="specialityForm.get('categoryName').hasError('pattern') && specialityForm.get('categoryName').dirty">*venue name required</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 label-right label-top">Category Image<span style="color: red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <div clss="add_images_box">
+                                            <ul class="img_list">
+                                                <li class="addImage" *ngIf="specialityForm.get('categoryImage').value">
+                                                    <i class="cross_icon fa fa-close" style="cursor: pointer" (click)="removeImage()"></i>
+                                                    <img src="{{specialityForm.get('categoryImage').value}}">
+                                                </li>
+                                                <li class="addImage" *ngIf="!specialityForm.get('categoryImage').value">
+                                                    <input class="file_field" type="file" style="cursor: pointer" (change)="onImageChange($event)" accept="image/*" />
+                                                    <i class="plusIcon">+</i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label class="col-sm-4 label-right label-top">Category Description<span style="color: red">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control custom-control" formControlName="categoryDescription" placeholder="Enter category description" maxlength="500" />
+                                            <p *ngIf="specialityForm.get('categoryDescription').hasError('required') && specialityForm.get('categoryDescription').dirty">*category description required</p>
+                                        </div>
+                                    </div>
+                            </div>
+                        </form>
+                    </div>
+                </fieldset>
+                <div class="table-button text-center mt30">
+                    <!-- <button (click)="addVenue()" class="btn btn-red" [disabled]="specialityForm.invalid || !venueImage.length || !logoImage || !addressField">Save </button> -->
+                    <button (click)="saveCategory()" [disabled]="!specialityForm.valid" class="btn btn-red">Save</button>
+                    <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>

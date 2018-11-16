@@ -1,0 +1,81 @@
+<div class="mainbox">
+  <app-side-menu></app-side-menu>
+  <div class="right-section no-scroll">
+    <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+    <div class="right-inner">
+      <div class="filter-block">
+        <fieldset class="global-fieldset">
+          <legend>Add Merchant</legend>
+          <div class="filter-content">
+            <form class="login_box_outer" [formGroup]='merchantForm' novalidate>
+              <div class="common-detail-box">
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Merchant Name<span style="color: red">*</span></label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control custom-control" (keypress)="name($event.keyCode)" formControlName="firstName" placeholder="Enter merchant name" maxlength="20" />
+                    <p *ngIf="merchantForm.get('firstName').hasError('required') && merchantForm.get('firstName').dirty">*merchant name required</p>
+                    <p *ngIf="merchantForm.get('firstName').hasError('pattern') && merchantForm.get('firstName').dirty">*merchant name required</p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Email<span style="color: red">*</span></label>
+                  <div class="col-sm-8">
+                    <input  type="email" class="form-control custom-control" (keypress)="keypress($event.keyCode)" formControlName="email" placeholder="Enter email id" maxlength="52" />
+                    <p *ngIf="merchantForm.get('email').hasError('required') && merchantForm.get('email').dirty">*email required</p>
+                    <p *ngIf="merchantForm.get('email').hasError('pattern') && merchantForm.get('email').dirty">*invalid email</p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Gender<span style="color: red">*</span></label>
+                  <div class="col-sm-8">
+                      <select class="form-control angle" formControlName="gender">
+                          <option value="">--select--</option>
+                          <option value="MALE">Male</option>
+                          <option value="FEMALE">Female</option>
+                      </select>
+                      <p *ngIf="merchantForm.get('gender').hasError('required') && merchantForm.get('gender').dirty">*gender required</p>
+                  </div>
+              </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Profile Pic<span style="color: red">*</span></label>
+                  <div class="col-sm-8">
+                    <div clss="add_images_box">
+                      <ul class="img_list">
+                        <li class="addImage" *ngIf="merchantForm.get('profilePic').value">
+                          <i class="cross_icon fa fa-close" style="cursor: pointer" (click)="removeImage()"></i>
+                          <img src="{{merchantForm.get('profilePic').value}}">
+                        </li>
+                        <li *ngIf="!merchantForm.get('profilePic').value" class="addImage">
+                          <input class="file_field" type="file" style="cursor: pointer" (change)="onImageChange($event)" accept="image/*" />
+                          <i class="plusIcon">+</i>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Password<span style="color: red">*</span></label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control custom-control" formControlName="password" placeholder="Enter password" maxlength="16" />
+                    <p  *ngIf=" merchantForm.get('password').hasError('required')  && merchantForm.get('password').dirty">*Please enter password</p>
+                    <p  *ngIf=" merchantForm.get('password').hasError('minlength')   && merchantForm.get('password').dirty">*Password should be greater then 8 character's</p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Confirm Password<span style="color: red">*</span></label>
+                  <div class="col-sm-8">
+                    <input  type="password" class="form-control custom-control" formControlName="confPassword" placeholder="Enter confirm password" maxlength="16" />
+                    <p *ngIf="merchantForm.get('confPassword').value != merchantForm.get('password').value && merchantForm.get('confPassword').dirty && (merchantForm.get('password').value && merchantForm.get('confPassword').value)">password not match</p>
+                    <p *ngIf="merchantForm.get('confPassword').hasError('required') && merchantForm.get('confPassword').dirty">*confirm password required</p>
+                  </div>
+                </div>
+              </div>
+          </form>
+      </div>
+      </fieldset>
+      <div class="table-button text-center mt30">
+        <button (click)="addMerchant()" class="btn btn-red" [disabled]="merchantForm.invalid || merchantForm.get('confPassword').value != merchantForm.get('password').value">Add</button>
+        <button [routerLink]="['/merchant-management']" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+  </div>

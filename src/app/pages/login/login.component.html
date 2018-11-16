@@ -1,0 +1,40 @@
+<header class="beforelogin">
+  <div class="logo"><a><img src="assets/img/logo.png"></a></div>
+</header>
+  <div class="before-login-wrapper">
+     <div class="inner-content clearfix">
+         <div class="login-main-content">
+            <div class="before-login-logo">
+             
+             </div>
+             <form class="login_box_outer" [formGroup]='loginForm' novalidate>
+
+             <div class="login-content-box">
+                 <h2 class="heading">Login</h2>
+                 <div class="form-group">
+                  <label class="common-label blue"><span style="color: red">*</span>Email</label>
+                    <input type="email" class="form-control" formControlName="email" (keypress)="keypress($event.keyCode)" placeholder="Enter email id" maxlength="52" required/>
+                    <p  *ngIf=" loginForm.get('email').hasError('required')  && loginForm.get('email').dirty">*email is required</p>
+                    <p  *ngIf=" loginForm.get('email').hasError('pattern')   && loginForm.get('email').dirty">*Please enter valid email</p>
+                </div>
+                  
+                <div class="form-group">
+                  <label class="common-label blue"><span style="color: red">*</span>Password</label>
+                    <input type="password" class="form-control" formControlName="password" (keypress)="keypress($event.keyCode)" placeholder="Enter password" maxlength="16" required/>
+                    <p  *ngIf=" loginForm.get('password').hasError('required')  && loginForm.get('password').dirty">*Please enter password</p>
+                    <p  *ngIf=" loginForm.get('password').hasError('minlength')   && loginForm.get('password').dirty">*Password should be greater then 8 character's</p>
+                </div>
+                  <div class="form-group">
+                      <div class="text-right">
+                         <a [routerLink]="['/forgot-password']" class="forget-pass">Forgot Password?</a>
+                      </div>
+                  </div>
+                  <div class="button-box">
+                     <button (click)="loginSubmit()" type="submit" [disabled]="!loginForm.valid" class="btn btn-red width100">Login</button>
+                  </div>
+              </div>
+              </form>
+           </div>
+      </div>
+
+    </div>

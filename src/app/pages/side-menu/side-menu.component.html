@@ -1,0 +1,62 @@
+<div class="header">
+  <nav class="navbar navbar-default">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#profile-collapse" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+    </div>
+  </nav>	
+</div>
+<div class="left-section">
+  <div class="menubox">
+    <div class="mobmenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="left-header">
+    <div class="logo"><a><img src="assets/img/logo.png"></a></div>
+  </div>
+      <div class="user-panel">
+          <span class="view-inline user_name">Admin Panel</span>
+      </div>
+  <div class="left-menu">
+    <ul class="nav">
+      <li><a [ngClass]="{'active': isActive == 'dashboard'}"  [routerLink]="['/dashboard']"><i class="fa fa-tachometer"></i>DASHBOARD</a></li>
+      <li><a [ngClass]="{'active': isActive == 'paypal'}"  [routerLink]="['/paypal']"><i class="fa fa-tachometer"></i>PAYPAL</a></li>
+      <li><a [ngClass]="{'active': isActive == 'user-management' || isActive == 'view-user' || isActive == 'edit-user' || isActive == 'user-change-Password' || isActive == 'add-user'  }" [routerLink]="['/user-management']"><i class="fa fa-users"></i>USER MANAGEMENT</a></li>
+      <li><a [ngClass]="{'active': isActive == 'merchant-management' || isActive == 'view-merchant' || isActive == 'edit-merchant' || isActive == 'add-merchant' || isActive == 'merchant-change-Password'  }" [routerLink]="['/merchant-management']"><i class="fa fa-users"></i>MERCHANT MANAGEMENT</a></li>
+      <li><a [ngClass]="{'active': isActive == 'venue-management' || isActive == 'add-venue' || isActive == 'view-venue' || isActive == 'edit-venue' || isActive == 'add-menu' || isActive == 'edit-venue-category' || isActive == 'edit-category-item' || isActive == 'add-more-category-items' || isActive == 'menu-management' || isActive == 'view-menu' || isActive == 'view-menu-items' || isActive == 'add-venue-speciality' ||  isActive == 'view-venue-speciality' || isActive == 'edit-venue-speciality' }"  [routerLink]="['/venue-management']"><i class="fa fa-angellist"></i>VENUE MANAGEMENT</a></li>
+      <li><a [ngClass]="{'active': isActive == 'order-management' || isActive == 'view-order-item' || isActive == 'view-order-user'}"  [routerLink]="['/order-management']"><i class="fa fa-tachometer"></i>ORDER MANAGEMENT</a></li>
+      <li><a [ngClass]="{'active': isActive == 'promotion-banner-management' || isActive == 'add-promotion-banner' || isActive == 'view-banner'}" [routerLink]="['/promotion-banner-management']"><i class="fa fa-product-hunt"></i>PROMOTION BANNER MANAGEMENT</a></li>
+      <li><a [ngClass]="{'active': isActive == 'static-content-management' }" [routerLink]="['/static-content-management']"><i class="fa fa-lastfm"></i>STATIC CONTENT</a></li>
+      <li><a [ngClass]="{'active': isActive == 'logout'}" data-toggle="modal" data-target="#logout_modal"><i class="fa fa-sign-out"></i>LOGOUT</a></li>
+    </ul>
+  </div>
+</div>
+
+<div id="logout_modal" class="modal fade" data-easein="bounceIn" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content common-detail-modal">
+          
+          <div class="modal-body">
+              <label class="modal-inner-text">
+                Are you sure you want to logout?
+              </label>
+
+              <div class="button-box mt20">
+                 <button class="btn btn-red mr10" (click)="logout()" data-dismiss="modal">Yes</button>
+                 <button class="btn btn-danger" data-dismiss="modal">No</button>
+              </div>
+          </div>
+          <div class="modal-footer">
+              
+          </div>
+      </div>
+  </div>
+</div>

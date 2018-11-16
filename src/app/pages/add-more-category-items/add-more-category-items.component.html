@@ -1,0 +1,120 @@
+<div class="mainbox">
+    <app-side-menu></app-side-menu>
+    <div class="right-section">
+        <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+        <div class="right-inner">
+            <div class="filter-block">
+                <fieldset class="global-fieldset">
+                    <legend>Category Detail</legend>
+                    <div class="filter-content">
+                        <div class="common-detail-box">
+                            <div class="form-group row">
+                                <label class="col-sm-6 label-right">Category Name</label>
+                                <div class="col-sm-6">
+                                    {{categoryDetail?.categoryName || '----'}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6  label-right">Category Images</label>
+                                <div class="col-sm-6">
+                                    <div clss="add_images_box">
+                                        <ul class="img_list">
+                                            <li class="addImage">
+                                                <img src="{{categoryDetail?.categoryImage || 'assets/img/placeholder.png'}}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div [formGroup]="menuForm">
+                <div class="repeate_area" *ngFor="let control of  menuForm.controls['menuItems'].controls; let i = index">
+                    <div class="filter-block">
+                        <fieldset class="global-fieldset">
+                            <legend>Add Items</legend>
+                            <div class="filter-content">
+                                <form class="login_box_outer" [formGroup]="control" novalidate>
+                                    <div class="common-detail-box">
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 label-right label-top">Item Name<span style="color: red">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control custom-control" formControlName="itemName" placeholder="Enter item name" maxlength="50" />
+                                                <p *ngIf="control.get('itemName').hasError('required') && control.get('itemName').dirty">*item name required</p>
+                                                <p *ngIf="control.get('itemName').hasError('pattern') && control.get('itemName').dirty">*invalid name</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 label-right label-top">Item Image<span style="color: red">*</span></label>
+                                            <div class="col-sm-8">
+                                                <div clss="add_images_box">
+                                                    <ul class="img_list">
+                                                        <li class="addImage" *ngIf="control.get('itemImage').value">
+                                                            <i class="cross_icon fa fa-close" style="cursor: pointer" (click)="removeImage(i, 'itemImage')"></i>
+                                                            <img [src]="control.get('itemImage').value">
+                                                        </li>
+                                                        <li class="addImage" *ngIf="!control.get('itemImage').value">
+                                                            <input class="file_field" type="file" style="cursor: pointer" (change)="onImageChange($event, i, 'itemImage')" accept="image/*"
+                                                            />
+                                                            <i class="plusIcon">+</i>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 label-right label-top">Item Price<span style="color: red">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control custom-control" formControlName="itemPrice" (keypress)="keypress($event.keyCode)" placeholder="Enter item price"
+                                                    maxlength="10" />
+                                                <p *ngIf="control.get('itemPrice').hasError('required') && control.get('itemPrice').dirty">*item price required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 label-right label-top">Item Code<span style="color: red">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control custom-control" formControlName="itemCode" (keypress)="keypress($event.keyCode)" placeholder="Enter item code"
+                                                    maxlength="10" />
+                                                <p *ngIf="control.get('itemCode').hasError('required') && control.get('itemCode').dirty">*item code required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 label-right label-top">Discount<span style="color: red">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control custom-control" formControlName="discount" (keypress)="keypress($event.keyCode)" placeholder="Enter item discount"
+                                                    maxlength="10" />
+                                                <p *ngIf="control.get('discount').hasError('required') && control.get('discount').dirty">*item code required</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 label-right label-top">Item Description<span style="color: red">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control custom-control" formControlName="itemDescription"  placeholder="Enter item description"
+                                                    maxlength="500" />
+                                                <p *ngIf="control.get('itemDescription').hasError('required') && control.get('itemDescription').dirty">*item description required</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="text-right">
+                        <button class="addmore btn btn-success" *ngIf="i>0 || menuForm.controls['menuItems'].controls.length>1" (click)="removeItem(i)">Remove Item</button>
+                    </div>
+                    <div class="text-right">
+                        <button class="addmore btn btn-success" *ngIf="((i+1) == menuForm.controls['menuItems'].controls.length)" [disabled]="control.invalid"
+                            (click)="newAdd()">Add More</button>
+                    </div>
+                </div>
+                </div>
+
+                <div class="table-button text-center mt30">
+                    <button (click)="addMoreItem()" class="btn btn-red" [disabled]="menuForm.invalid">Add Menu</button>
+                    <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

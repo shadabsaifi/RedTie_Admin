@@ -1,0 +1,129 @@
+<div class="mainbox">
+  <app-side-menu></app-side-menu>
+  <div class="right-section no-scroll">
+      <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+      <div class="right-inner">
+          <div class="filter-block">
+              <fieldset class="global-fieldset">
+                  <legend>Edit Venue</legend>
+                  <div class="filter-content">
+                      <form class="login_box_outer" [formGroup]='venueForm' novalidate>
+                          <div class="common-detail-box">
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Establishment Name<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <input class="form-control custom-control" formControlName="venueName" placeholder="Enter venue name" maxlength="30" />
+                                      <p *ngIf="venueForm.get('venueName').hasError('required') && venueForm.get('venueName').dirty">*venue name required</p>
+                                      <p *ngIf="venueForm.get('venueName').hasError('pattern') && venueForm.get('venueName').dirty">*enter valid name</p>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Type<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <select class="form-control angle" formControlName="venueType">
+                                          <option value="">--select--</option>
+                                          <option value="BAR">Bar</option>
+                                          <option value="RESTAURANT">Restaurant</option>
+                                      </select>
+                                      <p *ngIf="venueForm.get('venueType').hasError('required') && venueForm.get('venueType').dirty">*type required</p>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Address<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <input class="form-control custom-control" formControlName="address" id="address" placeholder="Enter venue address" maxlength="100"/>
+                                      <p *ngIf="venueForm.get('address').hasError('required') && venueForm.get('address').dirty">*address required</p>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">City<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <input class="form-control custom-control" formControlName="city" id="city" placeholder="Enter city name" maxlength="10"/>
+                                      <p *ngIf="venueForm.get('city').hasError('required') && venueForm.get('city').dirty">*city required</p>
+                                      <p *ngIf="venueForm.get('city').hasError('pattern') && venueForm.get('city').dirty">*enter valid city name</p> 
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Open Time<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <input type="time"  class="form-control custom-control" formControlName="openTime"  placeholder="venue_name" maxlength="50"/>
+                                      <p *ngIf="venueForm.get('openTime').hasError('required') && venueForm.get('openTime').dirty">*open time required</p>  
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Close Time<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <input type="time"  class="form-control custom-control" formControlName="closeTime"  placeholder="venue_name" maxlength="50"/>
+                                      <p *ngIf="venueForm.get('closeTime').hasError('required') && venueForm.get('closeTime').dirty">*close time required</p>   
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Status<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <select class="form-control angle" formControlName="status">
+                                          <option value="">--select--</option>
+                                          <option value="ACTIVE">Active</option>
+                                          <option value="INACTIVE">Inactive</option>
+                                      </select>
+                                      <p *ngIf="venueForm.get('status').hasError('required') && venueForm.get('status').dirty">*status required</p>   
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Product Images<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <div clss="add_images_box">
+                                          <ul class="img_list">
+                                              <li class="addImage" *ngIf="!venueForm.get('images').value.length">
+                                                  <img src="assets/img/placeholder.png">
+                                              </li>
+                                              <li class="addImage" *ngFor="let imageUrl of venueForm.get('images').value;let i = index">
+                                                  <i class="cross_icon fa fa-close" style="cursor: pointer" (click)="removeImage(i,'images')"></i>
+                                                  <img src="{{imageUrl}}">
+                                              </li>
+                                              <li *ngIf="venueForm.get('images').value.length < 5" class="addImage">
+                                                  <input class="file_field" type="file" style="cursor: pointer" (change)="onImageChange($event,'images')" accept="image/*" />
+                                                  <i class="plusIcon">+</i>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <p style='color:red'>{{imageString}}</p>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">logo Image<span style="color: red">*</span></label>
+                                  <div class="col-sm-8">
+                                      <div clss="add_images_box">
+                                          <ul class="img_list">
+                                              <li class="addImage" *ngIf="venueForm.get('logo').value">
+                                                  <i class="cross_icon fa fa-close" style="cursor: pointer" (click)="removeImage(i,'logo')"></i>
+                                                  <img src="{{venueForm.get('logo').value}}">
+                                              </li>
+                                              <li *ngIf="!venueForm.get('logo').value" class="addImage">
+                                                  <input class="file_field" type="file" style="cursor: pointer" (change)="onImageChange($event,'logo')" accept="image/*" />
+                                                  <i class="plusIcon">+</i>
+                                              </li>
+                                          </ul>
+
+                                      </div>
+                                      <p style='color:red'>{{logoString}}</p>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 label-right label-top">Description<span style="color: red">*</span></label>
+                                      <div class="col-sm-8">
+                                  <textarea class="form-control custom-control textarea-custom" placeholder="Description minimum 20 words" value="{{viewVenueDetail.description}}" formControlName="description" maxlength="100"></textarea>
+                                  <p *ngIf="venueForm.get('description').hasError('required') && venueForm.get('description').dirty">*descriptionrequired</p>
+                                  <p *ngIf="venueForm.get('description').hasError('minlength') && venueForm.get('description').dirty">*minimum 20 words required</p>        
+                              </div>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </fieldset>
+              <div class="table-button text-center mt30">
+                  <!-- <button (click)="addVenue()" class="btn btn-red" [disabled]="venueForm.invalid || !venueImage.length || !logoImage || !addressField">Save </button> -->
+                  <button (click)="saveVenue()" [disabled]="venueForm.invalid || !addressField" class="btn btn-red">Save </button>
+                  <button [routerLink]="['/venue-management']" class="btn btn-danger">Cancel</button>
+              </div>
+          </div>
+      </div>

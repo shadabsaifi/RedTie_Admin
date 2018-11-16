@@ -1,0 +1,52 @@
+<div class="mainbox">
+  <app-side-menu></app-side-menu>
+  <div class="right-section no-scroll">
+    <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+    <div class="right-inner">
+      <div class="filter-block">
+        <fieldset class="global-fieldset">
+          <legend>Change Password</legend>
+          <div class="filter-content">
+            <form class="login_box_outer" [formGroup]='paypalForm' novalidate>
+              <div class="common-detail-box">
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Currency</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control custom-control" readonly formControlName="currency" placeholder="INR" maxlength="50" />
+                    <p *ngIf="paypalForm.get('currency').hasError('required') && paypalForm.get('currency').dirty">*currency required</p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 label-right label-top">Amount</label>
+                  <div class="col-sm-8">
+                    <input  type="text" class="form-control custom-control" formControlName="amount" (change)="onAmount($event)" placeholder="enter amount" maxlength="20" />
+                    <p  *ngIf="paypalForm.get('amount').hasError('required') &&  paypalForm.get('amount').dirty" padding>*Amount field can not be empty</p>
+                  </div>
+                </div>
+              </div>
+          </form>
+      </div>
+      </fieldset>
+      <div class="table-button text-center mt30">
+        <button class="btn btn-red" [disabled]="paypalForm.invalid" data-toggel="modal" (click)="purchaseApi(paypalForm.value)" data-target="#tokenPurchase">Save</button>
+        <button (click)="back()" class="btn btn-danger">Back</button>
+      </div>
+    </div>
+  </div>
+  <div id="tokenPurchase" class="modal fade" data-easein="bounceIn" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content common-detail-modal">
+            <div class="modal-body">
+                <label class="modal-inner-text">
+                  Tokens will be credited to your Wallet.
+                </label>
+                <div class="button-box mt20">
+                  <div id="paypal-checkout-btn"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+  </div>

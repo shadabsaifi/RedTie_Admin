@@ -1,0 +1,95 @@
+<div class="login-wrapper">
+    <div class="container-common">
+       <div class="row">
+       <div class="col-md-6">
+          <div class="left-section-login">
+              <div class="login-logo1">
+                 <img src="assets/img/logo.png" alt="logo"/>
+              </div>
+              <div class="sigintext-block">
+              <h2>Create My Account</h2>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a [routerLink]="['/login']" >Already have an account? Sign In</a>
+            </div>
+          </div>
+       </div>
+      <div class="col-md-6">
+        <form class="login_box_outer" >
+          <div class="login-box max-WT-520">
+              <div class="login-right-block">
+                <div class="login-heading">
+                   <h4>CREATE ACCOUNT</h4>
+                </div>
+                <div class="login-box-body">
+                  <div class="form-group">
+                      <input type="email" class="form-control" placeholder="Email ID" maxlength="32" required/>
+                      <!-- <span  *ngIf="signupForm.get('email').hasError('required')  && signupForm.get('email').dirty">*Please enter email</span>
+                      <span  *ngIf="signupForm.get('email').hasError('pattern')   && signupForm.get('email').dirty">*Please enter valid email</span> -->
+                  </div>                   
+                  <div class="form-group">
+                      <input type="text" class="form-control"  placeholder="Username" />
+                      <!-- <span  *ngIf="signupForm.get('username').hasError('required')  && signupForm.get('username').dirty">*Please enter email</span>
+                      <span  *ngIf="signupForm.get('username').hasError('pattern')   && signupForm.get('username').dirty">*Please enter valid username</span> -->
+                  </div>
+
+                    <div class="form-group">
+                       <div class="input-group">
+                          <div class="input-group-prepend">
+                            <select class="select-custome wt-80">
+                              <option value="">+91</option>
+                            </select>   
+                          </div>
+                          <input type="text"  class="form-control form-control-md"  maxlength="10" placeholder="Phone Number">
+                        </div>
+                        <!-- <span *ngIf="signupForm.get('phone_number').hasError('required') && signupForm.get('phone_number').dirty">*phone number required</span>
+                        <span *ngIf="signupForm.get('phone_number').hasError('pattern') && signupForm.get('phone_number').dirty">*please enter valid phone number</span> -->
+                    </div>
+                    <div class="form-group bday-block">
+                       <div class="input-group">
+                        <div class="input-group-prepend">
+                           <label>Date of Birth</label>
+                        </div>
+                          <input type="date" class="form-control form-control-md"   placeholder="DD/MM/YYYY">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control"  id="company_name" placeholder="Company Name" />
+                      <!-- <span *ngIf="signupForm.get('company_name').hasError('required') && signupForm.get('company_name').dirty">*company name required</span> -->
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control"  id="job_title" placeholder="Job Tittle" />
+                      <!-- <span *ngIf="signupForm.get('job_title').hasError('required') && signupForm.get('job_title').dirty">*job title required</span> -->
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" maxlength="16" placeholder="Enter password"/>
+                      <!-- <span *ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').dirty">*password required</span>
+                      <span *ngIf="signupForm.get('password').hasError('minlength') && signupForm.get('password').dirty">*password should be greater then 8 character's</span> -->
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" maxlength="16" placeholder="Enter confirm password" />
+                      <!-- <span *ngIf="signupForm.get('confPassword').value != signupForm.get('password').value && signupForm.get('confPassword').dirty && (signupForm.get('password').value && signupForm.get('confPassword').value)">password not match</span>
+                      <span *ngIf="signupForm.get('confPassword').hasError('required') && signupForm.get('confPassword').dirty">*confirm password required</span> -->
+                    </div>
+                    <div class="form-group">
+                          <div class="inlineblock checkbox-main">
+                            <label class="checkbox-design">
+                              <input type="checkbox" name="ans"  /><span></span>App Alert
+                            </label>
+                          </div>
+                           <div class="inlineblock checkbox-main">
+                            <label class="checkbox-design">
+                              <input type="checkbox" /><span></span>Email Alert
+                            </label>
+                          </div>
+                    </div>
+                  </div>
+                    <div class="text-center mt40">
+                      <button (click)="signup()" class="btn btn-login btn-large  width100 font-100">CREATE ACCOUNT</button>
+                    </div>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>

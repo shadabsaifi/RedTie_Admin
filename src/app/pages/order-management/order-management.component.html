@@ -1,0 +1,82 @@
+<div class="mainbox">
+  <app-side-menu></app-side-menu>
+  <div class="right-section">
+    <div class="copyrights">Copyright © 2018 App name All Rights Reserved.</div>
+    <div class="right-inner">
+      <h1 class="heading">ORDER MANAGEMENT</h1>
+      <div class="filter-block">
+            <fieldset class="global-fieldset">
+                <legend>Order Board</legend>
+                <div class="filter-content">
+                  <div class="row">
+                      <div class="col-sm-6">
+                         <div class="form-group">
+                            <div class="search-icon">
+                               <input type="text" class="form-control max-wt-300 search-input" [(ngModel)]="searchWord" (keyup)="search()" placeholder="search">
+                               <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6">
+                          <div class="form-group d-inline-block">
+                              <div class="show-entries mb0">
+                                <select (ngModelChange)="selectPayment($event)" class="form-control" [(ngModel)]="payment" [ngModelOptions]="{standalone: true}">
+                                  <option value="">Payment Status</option>
+                                  <option value="DONE">Done</option>
+                                  <option value="PENDING">Pending</option>
+                              </select>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="box box-blue">
+              <div class="box-body">
+                  <div class="custom-table table-responsive">
+                <table class="table table-striped table-border">
+                    <thead>
+                        <tr>
+                          <th>SNo.</th>
+                          <th>Venue Name</th>
+                          <th>Order By</th>
+                          <th>Table Number</th>
+                          <th>Total Users</th>
+                          <th>Order Value</th>
+                          <th>Payment Status</th>
+                          <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of orderList.docs | paginate: { itemsPerPage: orderList.limit, currentPage: orderList.page, totalItems: orderList.total };  let i = index" [attr.data-index] ="i">
+                          <td *ngIf="orderList.page == 1">{{i + 1}}</td>
+                          <td *ngIf="orderList.page > 1">{{i + 1 + 10 * (orderList.page-1)}}</td>
+                          <td>{{order.venueName || '----'}}</td>
+                          <td>{{order.userName || '----'}}</td>
+                          <td>{{order.tableNumber || '----'}}</td>
+                          <td>{{order.totalUsers || '----'}}</td>
+                          <td>{{order.orderValue || '0'}}</td>
+                          <td>{{order.payment == 'DONE' ? 'Done': "Pending" || '----'}}</td>
+                          <td>
+                              <div class="action-btn">
+                                  <button class="btn btn-sm btn-success" (click)="view_order(order._id)"><i class="fa fa-eye"></i>&nbsp;View</button>
+                              </div>  
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  
+            <div *ngIf="orderList.docs.length==0" class="no_record"><h4>No records found!!</h4>
+            </div>   
+              </div>
+           </div>
+                </div>
+            </fieldset>
+        </div>
+             <ul class="custom-pagination">
+                  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+             </ul>
+            
+        </div>
+  </div>
+  </div>
